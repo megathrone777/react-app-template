@@ -18,6 +18,9 @@ const Input: React.FC<TProps> = ({
   errorMessage,
   iconId,
   name,
+  onBlur,
+  onChange,
+  onFocus,
   placeholder,
   required,
   type,
@@ -38,7 +41,7 @@ const Input: React.FC<TProps> = ({
 
         <input
           className={inputClass[isError ? "error" : "default"]}
-          {...{ autoComplete, name, placeholder, required, type }}
+          {...{ autoComplete, name, onBlur, onChange, onFocus, placeholder, required, type }}
         />
       </div>
 

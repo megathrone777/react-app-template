@@ -1,9 +1,9 @@
-export enum TFormFieldTypes {
-  username = "username",
+export enum TFormField {
+  email = "email",
   password = "password",
 }
 
 export interface TFormErrors {
-  password: null | string;
-  username: null | string;
+  [TFormField.email]: null | string;
+  [TFormField.password]: null | string;
 }

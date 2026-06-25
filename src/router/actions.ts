@@ -4,14 +4,14 @@ import { getUser } from "./helpers";
 
 export const loginAction: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const username = `${formData.get("username")}`.trim();
+  const email = `${formData.get("email")}`.trim();
   const password = `${formData.get("password")}`.trim();
-  const user = await getUser("username", username);
+  const user = await getUser("email", email);
 
   if (!user) {
     return data<TActionData>({
-      message: `User "${username}" not found.`,
-      name: "username",
+      message: `User with email "${email}" not found.`,
+      name: "email",
     });
   }
 

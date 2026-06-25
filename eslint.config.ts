@@ -1,4 +1,3 @@
-import eslintPluginImport from "eslint-plugin-import";
 import eslintPluginPerfectionist from "eslint-plugin-perfectionist";
 import eslintPluginReact from "@eslint-react/eslint-plugin";
 import eslintPluginStylistic from "@stylistic/eslint-plugin";
@@ -19,14 +18,10 @@ const config = defineConfig([
       "@eslint-react": eslintPluginReact,
       "@stylistic": eslintPluginStylistic,
       "@typescript-eslint": eslintPluginTypescript,
-      import: eslintPluginImport,
       perfectionist: eslintPluginPerfectionist,
     },
     rules: {
       "func-style": ["error", "expression"],
-      "import/named": "off",
-      "import/newline-after-import": "error",
-      "import/order": "off",
       "no-multi-spaces": "error",
       "newline-after-var": "error",
       "newline-before-return": "error",
@@ -66,6 +61,11 @@ const config = defineConfig([
       ],
       "no-trailing-spaces": "error",
       "no-unused-vars": "off",
+      "padding-line-between-statements": [
+        "error",
+        { blankLine: "always", prev: "import", next: "*" },
+        { blankLine: "any", prev: "import", next: "import" },
+      ],
       "prefer-const": "error",
       "prefer-destructuring": "off",
       quotes: "off",
