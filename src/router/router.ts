@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router";
 
 import { ErrorBoundary, Layout } from "@/components";
-import { HomePage, LoginPage, RegistrationPage, TestPage } from "@/pages";
+import { navPaths } from "@/globals";
+import { LoginPage, OverviewPage, RegistrationPage, TestPage } from "@/pages";
 import { Spinner } from "@/ui";
 
 import { loginAction } from "./actions";
+import { overviewLoader } from "./loaders";
 import {
   authMiddleware,
   dashboardMiddleware,
@@ -20,35 +22,45 @@ const router = createBrowserRouter([
       {
         children: [
           { index: true, middleware: [indexMiddleware] },
-          { action: loginAction, Component: LoginPage, path: "login" },
-          { Component: RegistrationPage, path: "registration" },
+          { Component: LoginPage, action: loginAction, path: navPaths.login },
+
+          {
+            Component: RegistrationPage,
+            path: navPaths.registration,
+          },
         ],
+
         Component: Layout.Auth,
         middleware: [authMiddleware],
-        path: "auth",
+        path: navPaths.auth,
       },
 
       {
         children: [
           {
-            Component: HomePage,
+            Component: OverviewPage,
+            id: "overview",
             index: true,
+            loader: overviewLoader,
           },
+
           {
             Component: TestPage,
-            path: "test",
+            path: navPaths.test,
           },
         ],
+
         Component: Layout.Dashboard,
         middleware: [dashboardMiddleware],
-        path: "dashboard",
+        path: navPaths.dashboard,
       },
 
-      { middleware: [logoutMiddleware], path: "logout" },
+      { middleware: [logoutMiddleware], path: navPaths.logout },
     ],
+
     ErrorBoundary,
     HydrateFallback: Spinner,
-    path: "/",
+    path: navPaths.base,
   },
 ]);
 

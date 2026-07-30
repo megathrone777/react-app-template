@@ -1,6 +1,8 @@
-import type React from "react";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export interface TProps {
-  className?: React.HTMLAttributes<HTMLOrSVGElement>["className"];
-  id: TIconID;
+export interface TProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLOrSVGElement>,
+  HTMLOrSVGElement
+> {
+  id: TIconId;
 }

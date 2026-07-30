@@ -1,18 +1,21 @@
 import React from "react";
 
-import { buttonClass, lineClass } from "./Burger.css";
+import { boxClass, buttonClass, lineClass } from "./Burger.css";
 
 import type { TProps } from "./Burger.types";
 
-const Burger: React.FC<TProps> = ({ isOpened, onClick }) => (
+const Burger: React.FC<TProps> = ({ className, isOpened, size, ...rest }) => (
   <button
-    {...{ onClick }}
-    className={buttonClass[isOpened ? "isOpened" : "default"]}
+    className={`
+      ${buttonClass({ size })}
+      ${className && !!className.length ? ` ${className}` : ""}
+    `}
     type="button"
+    {...rest}
   >
-    <span className={lineClass[isOpened ? "leftOpened" : "left"]} />
-    <span className={lineClass[isOpened ? "middleOpened" : "middle"]} />
-    <span className={lineClass[isOpened ? "rightOpened" : "right"]} />
+    <span className={boxClass({ size })}>
+      <span className={lineClass({ isOpened, size })} />
+    </span>
   </button>
 );
 

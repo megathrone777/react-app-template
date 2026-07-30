@@ -6,7 +6,7 @@ import type { TProps } from "./Icon.types";
 
 const Icon: React.FC<TProps> = ({ className, id }) => (
   <svg
-    className={className && className.length > 0 ? className : ""}
+    className={className && !!className.length ? className : ""}
     preserveAspectRatio="xMidYMid meet"
     viewBox={viewBoxMap[id]}
   >

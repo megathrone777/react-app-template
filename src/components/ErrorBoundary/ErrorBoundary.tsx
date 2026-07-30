@@ -32,7 +32,10 @@ const ErrorBoundary: React.FC = () => {
   return (
     <div className={wrapperClass}>
       {renderContent()}
-      <NavLink to="/">Back to main page</NavLink>
+
+      <p>
+        <NavLink to="/">Back to main page</NavLink>
+      </p>
     </div>
   );
 };

@@ -2,8 +2,8 @@ import { style } from "@/theme";
 
 export const wrapperClass = style({
   alignItems: "center",
-  display: "grid",
-  gridAutoFlow: "row",
+  display: "flex",
+  flexDirection: "column",
   justifyItems: "center",
   minHeight: "100dvh",
   paddingInline: 12,

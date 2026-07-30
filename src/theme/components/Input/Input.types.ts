@@ -1,6 +1,6 @@
-import type React from "react";
+import type { InputHTMLAttributes } from "react";
 
-export interface TProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TProps extends InputHTMLAttributes<HTMLInputElement> {
   errorMessage?: string;
-  iconId?: TIconID;
+  iconId?: TIconId;
 }

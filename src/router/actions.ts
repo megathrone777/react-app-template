@@ -1,27 +1,26 @@
-import { data, redirect, type ActionFunction } from "react-router";
+import { redirect, type ActionFunction } from "react-router";
 
-import { getUser } from "./helpers";
+import { navPaths } from "@/globals";
 
-export const loginAction: ActionFunction = async ({ request }) => {
-  const formData = await request.formData();
-  const email = `${formData.get("email")}`.trim();
-  const password = `${formData.get("password")}`.trim();
-  const user = await getUser("email", email);
+export const loginAction: ActionFunction = async () => {
+  // const queryString = await request.text();
+  // const params = new URLSearchParams(queryString);
 
-  if (!user) {
-    return data<TActionData>({
-      message: `User with email "${email}" not found.`,
-      name: "email",
-    });
-  }
+  // if (success) {
+  //   localStorage.setItem("user", JSON.stringify(userObj));
+  //   return redirect(`${navPaths.base}${navPaths.dashboard}`);
+  // }
+  // return errors;
 
-  if (user.password.toLowerCase() !== password.toLowerCase()) {
-    return data<TActionData>({
-      message: "Wrong password",
-      name: "password",
-    });
-  }
+  localStorage.setItem("user", "true");
 
-  localStorage.setItem("user", JSON.stringify(user));
-  throw redirect("/dashboard");
+  return redirect(`${navPaths.base}${navPaths.dashboard}`);
+};
+
+export const registrationAction: ActionFunction = async () => {
+  // const params = new URLSearchParams(queryString);
+  // if (success) {
+  // return redirect(`${navPaths.base}${navPaths.dashboard}`);
+  // }
+  // return errors;
 };

@@ -1,10 +1,13 @@
-// export const itemsLoader: LoaderFunction = async () => {
-//   try {
-//     const response = await fetch("/items.json");
-//     const items = await response.json();
+import { createOverviewStore, type TOverviewStore } from "@/store";
 
-//     return items;
-//   } catch {
-//     throw data("Record Not Found", { status: 404, statusText: "Cannot fetch data" });
-//   }
-// };
+import type { LoaderFunction } from "react-router";
+
+export const overviewLoader: LoaderFunction = async (): Promise<
+  TRouteLoaderStore<TOverviewStore>
+> => {
+  const store = createOverviewStore();
+
+  void store.getState().loadLogs();
+
+  return { store };
+};

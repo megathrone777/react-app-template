@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router";
 
+import { navPaths } from "@/globals";
 import { uuid } from "@/utils";
 
 import { linkClass, wrapperClass } from "./Header.css";
@@ -36,7 +37,7 @@ const Header: React.FC = () => (
 
     <NavLink
       replace
-      to="/logout"
+      to={`${navPaths.base}${navPaths.logout}`}
       viewTransition
     >
       LogOut

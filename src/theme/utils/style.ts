@@ -1,10 +1,8 @@
 import { style as vanillaStyle } from "@vanilla-extract/css";
 
-import { devices, themeVars, type StyleArg, type ThemeVars } from "@/theme";
+import { devices, themeVars, type StyleArg } from "@/theme";
 
-const resolveStyle = (styleArg: StyleArg, vars: ThemeVars): string =>
-  vanillaStyle(typeof styleArg === "function" ? styleArg(vars) : styleArg);
-
-const style = (arg: StyleArg): string => resolveStyle(arg, { devices, ...themeVars });
+const style = (arg: StyleArg): string =>
+  vanillaStyle(typeof arg === "function" ? arg({ devices, ...themeVars }) : arg);
 
 export { style };

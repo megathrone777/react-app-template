@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta
+      content="initial-scale=1.0, interactive-widget=resizes-content, maximum-scale=1.0, viewport-fit=cover, width=device-width"
+      name="viewport"
+    >
+    <title>Icons</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        margin: 0;
+        padding: 24px;
+        color: #111928;
+        background: #f9fafb;
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      input {
+        padding: 8px 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 14px;
+        max-width: 320px;
+        background: #fff;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #0baac9;
+      }
+
+      .count {
+        color: #6b7280;
+        font-size: 13px;
+        margin: 0;
+      }
+
+      ul {
+        flex-wrap: wrap;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        gap: 12px;
+      }
+
+      li {
+        display: flex;
+        flex-basis: 140px;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 8px;
+        background-color: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        cursor: pointer;
+        transition:
+          border-color 0.15s,
+          background-color 0.15s,
+          transform 0.08s;
+      }
+
+      li:hover {
+        border-color: #0baac9;
+      }
+
+      li:active {
+        transform: scale(0.98);
+      }
+
+      li.copied {
+        border-color: #0baac9;
+        background: #ecfeff;
+      }
+
+      li svg {
+        width: 32px;
+        height: 32px;
+        color: #1f2a37;
+      }
+
+      li span {
+        font:
+          12px/1.2 ui-monospace,
+          SFMono-Regular,
+          Menlo,
+          monospace;
+        color: #4b5563;
+        text-align: center;
+        word-break: break-all;
+      }
+
+      li.hidden {
+        display: none;
+      }
+
+      .empty {
+        color: #9ca3af;
+        font-size: 14px;
+        padding: 24px 0;
+        text-align: center;
+      }
+
+      .empty.hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <%= sprite %>
+
+    <header>
+      <h1>Icon Kitchensink</h1>
+
+      <input
+        autofocus
+        id="filter"
+        placeholder="Filter by id..."
+        type="search"
+      >
+
+      <p class="count">
+        <span id="visible"><%= count %></span> / <%= count %> icons - click a tile to copy its id.
+      </p>
+    </header>
+
+    <ul id="grid">
+      <%= items %>
+    </ul>
+
+    <p
+      class="empty hidden"
+      id="empty"
+    >
+      No icons match.
+    </p>
+
+    <script>
+      const grid = document.getElementById("grid");
+      const filter = document.getElementById("filter");
+      const counter = document.getElementById("visible");
+      const empty = document.getElementById("empty");
+      const items = Array.from(grid.querySelectorAll("li.tile"));
+
+      filter.addEventListener("input", () => {
+        const q = filter.value.trim().toLowerCase();
+        let visible = 0;
+        for (const li of items) {
+          const match = q.length === 0 || li.dataset.id.toLowerCase().includes(q);
+          li.classList.toggle("hidden", !match);
+          if (match) visible++;
+        }
+        counter.textContent = visible;
+        empty.classList.toggle("hidden", visible > 0);
+      });
+
+      grid.addEventListener("click", async (e) => {
+        const li = e.target.closest("li[data-id]");
+        if (!li) return;
+        try {
+          await navigator.clipboard.writeText(li.dataset.id);
+          li.classList.add("copied");
+          setTimeout(() => li.classList.remove("copied"), 600);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

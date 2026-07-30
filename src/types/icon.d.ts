@@ -1,5 +1,5 @@
 declare global {
-  type TIconID = "car" | "email" | "lock" | "user";
+  type TIconId = "car" | "email" | "lock" | "user";
 }
 
 export {};

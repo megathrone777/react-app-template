@@ -16,17 +16,11 @@
       "@/*": ["./src/*"],
       "@/ui": ["./src/theme/components/"]
     },
-    "skipLibCheck": true,
     "strictNullChecks": true,
     "target": "ES2022",
+    "types": ["@rsbuild/core/types"],
     "useDefineForClassFields": true
   },
   "exclude": ["**/node_modules", "dist"],
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "eslint.config.ts",
-    "prettier.config.ts",
-    "rsbuild.config.ts"
-  ]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "rsbuild.config.ts"]
 }

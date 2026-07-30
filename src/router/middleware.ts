@@ -1,39 +1,32 @@
 import { redirect, type MiddlewareFunction } from "react-router";
 
-import { AuthContext } from "@/context";
-
-const getUser = (): null | TUser => {
-  const storedUser = localStorage.getItem("user");
-  const user = storedUser ? JSON.parse(storedUser) : null;
-
-  return user;
-};
+import { navPaths } from "@/globals";
 
 export const authMiddleware: MiddlewareFunction = () => {
-  const user = getUser();
-
-  if (user) {
-    return redirect("/dashboard");
+  if (localStorage.getItem("user")) {
+    return redirect(`${navPaths.base}${navPaths.dashboard}`);
   }
 };
 
-export const dashboardMiddleware: MiddlewareFunction = ({ context }) => {
-  const user = getUser();
+export const dashboardMiddleware: MiddlewareFunction = () => {
+  const storedUser = localStorage.getItem("user");
 
-  if (!user) {
-    throw redirect("/auth/login");
+  if (!storedUser) {
+    throw redirect(`${navPaths.base}${navPaths.auth}/${navPaths.login}`);
   }
-
-  context.set(AuthContext, user);
 };
 
 export const indexMiddleware: MiddlewareFunction = () => {
-  const user = getUser();
+  const storedUser = localStorage.getItem("user");
 
-  throw redirect(user ? "/dashboard" : "/auth/login");
+  throw redirect(
+    storedUser
+      ? `${navPaths.base}${navPaths.dashboard}`
+      : `${navPaths.base}${navPaths.auth}/${navPaths.login}`
+  );
 };
 
 export const logoutMiddleware: MiddlewareFunction = () => {
   localStorage.removeItem("user");
-  throw redirect("/auth/login");
+  throw redirect(`${navPaths.base}${navPaths.auth}/${navPaths.login}`);
 };

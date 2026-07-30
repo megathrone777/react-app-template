@@ -29,7 +29,7 @@ const Input: React.FC<TProps> = ({
 
   return (
     <div className={wrapperClass}>
-      <div className={layoutClass[isError ? "error" : "default"]}>
+      <div className={layoutClass({ isError })}>
         {iconId && (
           <div className={iconWrapperClass}>
             <Icon
@@ -40,7 +40,7 @@ const Input: React.FC<TProps> = ({
         )}
 
         <input
-          className={inputClass[isError ? "error" : "default"]}
+          className={inputClass({ isError })}
           {...{ autoComplete, name, onBlur, onChange, onFocus, placeholder, required, type }}
         />
       </div>

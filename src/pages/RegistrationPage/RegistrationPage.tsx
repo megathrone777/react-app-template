@@ -1,43 +1,26 @@
 import React from "react";
 import { NavLink } from "react-router";
 
-const pageTitle: string = "Registration";
+import { Metadata } from "@/components";
+import { navPaths } from "@/globals";
 
-const RegistrationPage: React.FC = () => {
-  return (
-    <>
-      <title>{`${pageTitle}`}</title>
+const title: string = "Registration page";
 
-      <div>
-        <h1>{pageTitle}</h1>
+const RegistrationPage: React.FC = () => (
+  <>
+    <Metadata {...{ title }} />
+    <h1>{title}</h1>
+    <p>Registration form here...</p>
 
-        <form>
-          <input
-            name="username"
-            type="text"
-          />
-
-          <input
-            name="email"
-            type="email"
-          />
-
-          <input
-            name="password"
-            type="password"
-          />
-
-          <input
-            name="password-repeat"
-            type="password"
-          />
-
-          <button type="submit">Register</button>
-          <NavLink to="/auth/login">Already have an account?</NavLink>
-        </form>
-      </div>
-    </>
-  );
-};
+    <p>
+      <NavLink
+        to={`${navPaths.base}${navPaths.auth}/${navPaths.login}`}
+        viewTransition
+      >
+        Already have an account?
+      </NavLink>
+    </p>
+  </>
+);
 
 export { RegistrationPage };
