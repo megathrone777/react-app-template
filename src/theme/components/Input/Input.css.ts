@@ -57,7 +57,7 @@ export const inputClass = recipe(({ colors, easing, fonts }) => ({
     paddingLeft: 40,
     transitionDuration: ".15s",
     transitionProperty: "border-color, box-shadow",
-    transitionTimingFunction: easing.default,
+    transitionTimingFunction: easing,
     width: "100%",
 
     "::placeholder": {

@@ -1,6 +1,6 @@
-import { colors, devices, fonts, easing } from "@/theme/variables";
+import { colors, devices, fonts } from "@/theme/variables";
 
-const theme = { colors, devices, easing, fonts };
+const theme = { colors, devices, fonts };
 
 const useTheme = (): typeof theme => theme;
 
